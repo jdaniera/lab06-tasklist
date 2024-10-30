@@ -62,12 +62,8 @@ function Task({ task, onChange, onDelete }) {
           className='check-box'
           type="checkbox"
           checked={task.done}
-          onChange={e => {
-            onChange({
-              ...task,
-              done: e.target.checked
-            });
-          }}
+          onChange={() => onChange({ ...task, done: !task.done })}
+          disabled={task.done}
         />
         {taskContent}
         <button 
