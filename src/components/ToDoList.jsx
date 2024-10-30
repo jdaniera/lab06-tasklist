@@ -1,13 +1,14 @@
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import AddTask from './AddTask.jsx';
 import TaskList from './TaskList.jsx';
-import '../App.css'
 
 export default function ToDoList() {
   const [tasks, dispatch] = useReducer(
     tasksReducer,
     initialTasks
   );
+
+  const [filter, setFilter] = useState('all')
 
   function handleAddTask(text) {
     dispatch({
@@ -31,6 +32,13 @@ export default function ToDoList() {
     });
   }
 
+  const filteredTasks = tasks.filter(task => {
+    if (filter === 'completed') return task.done;
+    if (filter === 'pending') return !task.done;
+    return true;
+  });
+
+
   return (
     <>
         <div className='add-box'> 
@@ -38,13 +46,33 @@ export default function ToDoList() {
                 onAddTask={handleAddTask}
             />
         </div>
-        <div>
-              <h3>Task Remaining: {tasks.length}</h3> 
+        <div className='counterFilter'>
+          <h3>Task Remaining: {tasks.filter(task => !task.done).length}</h3>
+          <div className="filter-buttons">
+            <button 
+              onClick={() => setFilter('all')}
+              className={filter === 'all' ? 'active' : ''}
+            >
+              All Tasks
+            </button>
+            <button 
+              onClick={() => setFilter('completed')}
+              className={filter === 'completed' ? 'active' : ''}
+            >
+              Completed
+            </button>
+            <button 
+              onClick={() => setFilter('pending')}
+              className={filter === 'pending' ? 'active' : ''}
+            >
+              Pending
+            </button>
+          </div>
         </div>
         <div>
             <TaskList
                 className="todolist"
-                tasks={tasks}
+                tasks={filteredTasks}
                 onChangeTask={handleChangeTask}
                 onDeleteTask={handleDeleteTask}
             />

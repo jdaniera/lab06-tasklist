@@ -54,6 +54,7 @@ h1 {
 .todolist {
   text-align: left;
   flex-direction: column;
+  position: relative;
 }
 
 .done-msg {
@@ -73,7 +74,7 @@ ul li {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  color: green;
   cursor: pointer;
   transition: border-color 0.25s;
   width: 8rem;
@@ -82,6 +83,7 @@ ul li {
 
 .button-add:hover {
   background-color: #646cff;
+  color: white;
 }
 
 .button-add:focus,
@@ -97,4 +99,34 @@ ul li {
 
 .button-delete:hover {
   background-color: darkred;
+}
+
+.counterFilter {
+  position: relative;
+}
+
+
+.filter-buttons {
+  width: 100%;
+  position: relative;
+}
+
+.filter-buttons button {
+  background-color: transparent;
+  width: 6rem;
+  border: 1px solid gray;
+  border-radius: 30px;
+  color: white;
+  margin-right: 1rem;
+}
+
+.filter-buttons button:hover {
+  background-color: lightgray;
+  color: black;
+}
+
+.filter-buttons .active {
+  background-color: lightgray;
+  color: black;
+  border-color: lightgray;
 }
